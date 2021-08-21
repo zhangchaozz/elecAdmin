@@ -1,8 +1,10 @@
 <template>
   <div class="components-container board">
-    <Kanban :key="1" :list="list1" :group="group" class="kanban todo" header-text="Todo" />
-    <Kanban :key="2" :list="list2" :group="group" class="kanban working" header-text="Working" />
-    <Kanban :key="3" :list="list3" :group="group" class="kanban done" header-text="Done" />
+    <el-row :gutter="40">
+      <el-col :span="8"><Kanban :key="1" :list="list1" :group="group" class="kanban todo" header-text="Todo" /></el-col>
+      <el-col :span="8"><Kanban :key="2" :list="list2" :group="group" class="kanban working" header-text="Working" /></el-col>
+      <el-col :span="8"><Kanban :key="3" :list="list3" :group="group" class="kanban done" header-text="Done" /></el-col>
+    </el-row>
   </div>
 </template>
 <script>
@@ -39,7 +41,8 @@ export default {
 <style lang="scss">
 .board {
   width: 1000px;
-  margin-left: 20px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   justify-content: space-around;
   flex-direction: row;
