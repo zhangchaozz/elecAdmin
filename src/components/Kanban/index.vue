@@ -2,6 +2,11 @@
   <div class="board-column">
     <div class="board-column-header">
       {{ headerText }}
+      <div style="position:relative;right:0px;">
+        <span style="float: right ;margin-top: -50px;margin-right:2px;" @click="deleteEle(element)">
+          <i style="color:#ff4949" class="el-icon-circle-plus-outline" />
+        </span>
+      </div>
     </div>
     <draggable
       :list="list"
@@ -11,6 +16,11 @@
     >
       <div v-for="element in list" :key="element.id" class="board-item">
         {{ element.name }} {{ element.id }}
+        <div style="position:relative;right:0px;">
+          <span style="float: right ;margin-top: -70px;margin-right:2px;" @click="deleteEle(element)">
+            <i style="color:#ff4949" class="el-icon-delete" />
+          </span>
+        </div>
       </div>
     </draggable>
   </div>
@@ -25,6 +35,10 @@ export default {
     draggable
   },
   props: {
+    kanbanId:{
+      type: Number,
+      default: 0 
+    },
     headerText: {
       type: String,
       default: 'Header'
@@ -43,11 +57,29 @@ export default {
     }
   },
   methods: {
+    isNotInList(v) {
+      return this.list.every(k => v.id !== k.id)
+    },
+    deleteEle(ele) {
+      console.log("deleteEle")
+      console.log("this.key"+this.kanbanId)
+      this.$emit("showDialog", this.kanbanId, ele)
+    },
+    doDeleteEle(ele) {
+      for (const item of this.list) {
+        if (item.id === ele.id) {
+          const index = this.list.indexOf(item)
+          this.list.splice(index, 1)
+          break
+        }
+      }
+    },
     setData(dataTransfer) {
       // to avoid Firefox bug
       // Detail see : https://github.com/RubaXa/Sortable/issues/1012
       dataTransfer.setData('Text', '')
     }
+
   }
 }
 </script>
