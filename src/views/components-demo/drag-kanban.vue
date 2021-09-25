@@ -37,7 +37,6 @@ export default {
         { name: 'Mission', id: 2 },
         { name: 'Mission', id: 3 },
         { name: 'Mission', id: 4 }
-        { name: 'Mission', id: 5 }
       ],
       list2: [
         { name: 'Mission', id: 5 },
